@@ -1,0 +1,52 @@
+/* Full-page spotlight */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  transition: background 0.08s ease;
+}
+
+/* Lagging outer ring */
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  z-index: 9999;
+  transition:
+    width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.25s ease,
+    background 0.25s ease;
+  will-change: transform;
+}
+
+/* Sharp center dot */
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 168, 55, 0.95);
+  pointer-events: none;
+  z-index: 10000;
+  box-shadow: 0 0 10px rgba(255, 168, 55, 0.7), 0 0 20px rgba(255, 168, 55, 0.3);
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+/* Hide on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .spotlight,
+  .ring,
+  .dot {
+    display: none;
+  }
+}

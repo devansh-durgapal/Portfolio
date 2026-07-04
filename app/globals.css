@@ -29,3 +29,14 @@ body {
   background: rgba(255, 165, 55, 0.25);
   border-radius: 2px;
 }
+
+/* Custom cursor — hide default */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
+}
