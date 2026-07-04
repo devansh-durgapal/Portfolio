@@ -2,9 +2,9 @@
 
 import VideoIntro from '@/components/VideoIntro/VideoIntro';
 import SkillsSection from '@/components/SkillsSection/SkillsSection';
-import Contact from '@/components/Contact/Contact';
 import { useState } from 'react';
-// import Link from 'next/link';
+import Link from 'next/link';
+import Contact from '@/components/Contact/Contact';
 
 const projects = [
   {
@@ -14,7 +14,7 @@ const projects = [
     stack: ['TensorFlow', 'Keras', 'CNN', 'Python'],
     github: 'https://github.com/devansh-durgapal/Brain-tumor-classification',
     highlight: true,
-
+    color: '#FF6F00',
     stat: '88.6% Accuracy',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
@@ -25,10 +25,12 @@ const projects = [
     ),
   },
   {
+    title: 'Prerana — Persona Chatbot',
     tag: 'Generative AI · LangChain',
     desc: 'A persona-driven conversational AI built on LangChain with RAG pipelines, ChromaDB vector memory, and Groq (LLaMA 3.1) for cloud inference and Ollama for local fallback.',
     stack: ['LangChain', 'ChromaDB', 'Groq', 'Ollama'],
     github: 'https://github.com/devansh-durgapal/AI-Assistant',
+    color: '#1C7C54',
     stat: 'RAG + Memory',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
@@ -42,6 +44,7 @@ const projects = [
     desc: 'BiLSTM model for Twitter sentiment classification achieving 91.2% training accuracy. Explored sequence modelling with embeddings, dropout regularisation, and class-balanced training.',
     stack: ['PyTorch', 'BiLSTM', 'NLP', 'HuggingFace'],
     github: 'https://github.com/devansh-durgapal-ship-it',
+    color: '#1D9BF0',
     stat: '91.2% Accuracy',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
@@ -55,6 +58,7 @@ const projects = [
     desc: 'Neural network trained on clinical patient data to predict heart failure risk. Focused on interpretability, precision-recall tradeoffs, and handling class imbalance in medical datasets.',
     stack: ['TensorFlow', 'Keras', 'Python', 'Scikit-learn'],
     github: 'https://github.com/devansh-durgapal/heart-failure-prediction',
+    color: '#EA4335',
     stat: 'Clinical AI',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
@@ -68,6 +72,7 @@ const projects = [
     desc: 'LangChain-based RAG system with FAISS and ChromaDB vector stores, ArXiv and Wikipedia retrievers, and persistent message history. Supports Groq cloud and local Ollama inference.',
     stack: ['LangChain', 'FAISS', 'ChromaDB', 'LLaMA'],
     github: 'https://github.com/devansh-durgapal-ship-it',
+    color: '#9C27B0',
     stat: 'Multi-retriever',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
@@ -81,7 +86,7 @@ const projects = [
     desc: 'This very site — a Next.js App Router portfolio with a Three.js particle bokeh layer, ambient dual-layer video hero, glassmorphism controls, and cinematic entrance animations.',
     stack: ['Next.js', 'Three.js', 'React', 'CSS Modules'],
     github: 'https://github.com/devansh-durgapal/Portfolio',
-    emoji: '🎬',
+    color: '#049EF4',
     stat: 'Live Site',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
@@ -106,89 +111,154 @@ function ProjectCard({ p }) {
       onMouseLeave={() => setHovered(false)}
       onMouseMove={handleMouseMove}
       style={{
-        ...styles.card,
-        ...(p.highlight ? styles.cardHighlight : {}),
-        transform: hovered ? 'translateY(-6px) scale(1.02)' : 'translateY(0) scale(1)',
-        boxShadow: hovered
-          ? p.highlight
-            ? '0 24px 60px rgba(255,168,55,0.18), 0 0 0 1px rgba(255,168,55,0.35)'
-            : '0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.12)'
-          : p.highlight
-            ? '0 0 0 1px rgba(255,168,55,0.25)'
-            : '0 0 0 1px rgba(255,255,255,0.07)',
-        transition: 'transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, background 0.3s ease',
-        background: hovered
-          ? p.highlight ? 'rgba(255,168,55,0.08)' : 'rgba(255,255,255,0.06)'
-          : p.highlight ? 'rgba(255,168,55,0.04)' : 'rgba(255,255,255,0.03)',
+        borderRadius: '18px',
+        padding: '26px 24px 22px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '11px',
         position: 'relative',
         overflow: 'hidden',
         cursor: 'pointer',
+        fontFamily: 'SF Pro Display, -apple-system, sans-serif',
+        transform: hovered ? 'translateY(-8px) scale(1.03)' : 'translateY(0) scale(1)',
+        boxShadow: hovered
+          ? `0 28px 70px rgba(0,0,0,0.55), 0 0 0 1px ${p.color}55, 0 0 40px ${p.color}18`
+          : p.highlight
+            ? '0 0 0 1px rgba(255,168,55,0.22)'
+            : '0 0 0 1px rgba(255,255,255,0.07)',
+        background: hovered
+          ? 'rgba(255,255,255,0.055)'
+          : p.highlight
+            ? 'rgba(255,168,55,0.03)'
+            : 'rgba(255,255,255,0.025)',
+        transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, background 0.3s ease',
       }}
     >
+      {/* Mouse-follow spotlight */}
       <div style={{
-        position: 'absolute', width: '220px', height: '220px', borderRadius: '50%',
-        background: p.highlight
-          ? 'radial-gradient(circle, rgba(255,168,55,0.13) 0%, transparent 70%)'
-          : 'radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%)',
-        left: pos.x - 110, top: pos.y - 110, pointerEvents: 'none',
-        opacity: hovered ? 1 : 0, transition: 'opacity 0.3s ease', zIndex: 0,
+        position: 'absolute',
+        width: '240px', height: '240px', borderRadius: '50%',
+        background: `radial-gradient(circle, ${p.color}22 0%, transparent 70%)`,
+        left: pos.x - 120, top: pos.y - 120,
+        pointerEvents: 'none',
+        opacity: hovered ? 1 : 0,
+        transition: 'opacity 0.3s ease',
+        zIndex: 0,
       }} />
 
+      {/* Ambient glow blob */}
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: '18px',
+        background: `radial-gradient(circle at 30% 30%, ${p.color}28 0%, transparent 60%)`,
+        pointerEvents: 'none',
+        opacity: hovered ? 1 : 0,
+        transition: 'opacity 0.4s ease',
+        zIndex: 0,
+      }} />
+
+      {/* Top row: icon + stat badge */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-        <span style={{
-          fontSize: '28px',
-          transform: hovered ? 'scale(1.2) rotate(-5deg)' : 'scale(1) rotate(0deg)',
-          transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)',
-          display: 'inline-block',
-        }}>{p.emoji}</span>
+        <div style={{
+          color: hovered ? p.color : 'rgba(255,255,255,0.4)',
+          transform: hovered ? 'scale(1.2) rotate(-6deg)' : 'scale(1) rotate(0deg)',
+          filter: hovered ? `drop-shadow(0 0 10px ${p.color}bb)` : 'none',
+          transition: 'color 0.35s ease, transform 0.4s cubic-bezier(0.34,1.56,0.64,1), filter 0.35s ease',
+          width: 30, height: 30,
+        }}>
+          {p.icon}
+        </div>
         <span style={{
           fontSize: '10px', letterSpacing: '0.1em',
-          color: p.highlight ? 'rgba(255,168,55,0.9)' : 'rgba(255,255,255,0.35)',
-          background: p.highlight ? 'rgba(255,168,55,0.12)' : 'rgba(255,255,255,0.06)',
-          border: `1px solid ${p.highlight ? 'rgba(255,168,55,0.3)' : 'rgba(255,255,255,0.1)'}`,
+          color: hovered ? p.color : 'rgba(255,255,255,0.3)',
+          background: hovered ? `${p.color}18` : 'rgba(255,255,255,0.05)',
+          border: `1px solid ${hovered ? p.color + '44' : 'rgba(255,255,255,0.08)'}`,
           padding: '3px 10px', borderRadius: '40px',
           fontFamily: 'SF Pro Display, -apple-system, sans-serif',
-          opacity: hovered ? 1 : 0.6, transition: 'opacity 0.3s ease',
-        }}>{p.stat}</span>
+          transition: 'all 0.3s ease',
+        }}>
+          {p.stat}
+        </span>
       </div>
 
-      <p style={{ ...styles.cardTag, position: 'relative', zIndex: 1 }}>{p.tag}</p>
-      <h3 style={{
-        ...styles.cardTitle, position: 'relative', zIndex: 1,
-        color: hovered ? '#fff' : 'rgba(255,255,255,0.88)',
+      {/* Tag */}
+      <p style={{
+        fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase',
+        color: hovered ? p.color : 'rgba(255,168,55,0.55)',
+        margin: 0, position: 'relative', zIndex: 1,
         transition: 'color 0.3s ease',
-      }}>{p.title}</h3>
+      }}>
+        {p.tag}
+      </p>
 
+      {/* Title */}
+      <h3 style={{
+        fontSize: '17px', fontWeight: 600, letterSpacing: '-0.01em',
+        margin: 0, position: 'relative', zIndex: 1,
+        color: hovered ? '#fff' : 'rgba(255,255,255,0.85)',
+        transition: 'color 0.3s ease',
+      }}>
+        {p.title}
+      </h3>
+
+      {/* Desc — slides in on hover */}
       <div style={{
-        overflow: 'hidden', maxHeight: hovered ? '120px' : '0px',
-        opacity: hovered ? 1 : 0, transition: 'max-height 0.4s ease, opacity 0.35s ease',
+        overflow: 'hidden',
+        maxHeight: hovered ? '120px' : '0px',
+        opacity: hovered ? 1 : 0,
+        transition: 'max-height 0.4s ease, opacity 0.35s ease',
         position: 'relative', zIndex: 1,
       }}>
-        <p style={styles.cardDesc}>{p.desc}</p>
+        <p style={{ fontSize: '13px', lineHeight: 1.75, color: 'rgba(255,255,255,0.42)', margin: '2px 0 0', fontWeight: 300 }}>
+          {p.desc}
+        </p>
       </div>
 
-      <div style={{ ...styles.stackRow, position: 'relative', zIndex: 1 }}>
+      {/* Stack pills */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '2px', position: 'relative', zIndex: 1 }}>
         {p.stack.map((s) => (
           <span key={s} style={{
-            ...styles.stackPill,
-            background: hovered
-              ? p.highlight ? 'rgba(255,168,55,0.1)' : 'rgba(255,255,255,0.09)'
-              : 'rgba(255,255,255,0.05)',
-            transition: 'background 0.3s ease',
-          }}>{s}</span>
+            padding: '3px 10px', borderRadius: '40px',
+            background: hovered ? `${p.color}14` : 'rgba(255,255,255,0.05)',
+            border: `1px solid ${hovered ? p.color + '33' : 'rgba(255,255,255,0.08)'}`,
+            fontSize: '10px',
+            color: hovered ? p.color : 'rgba(255,255,255,0.35)',
+            letterSpacing: '0.06em',
+            transition: 'all 0.3s ease',
+          }}>
+            {s}
+          </span>
         ))}
       </div>
 
+      {/* GitHub link — slides up on hover */}
       <div style={{
-        overflow: 'hidden', maxHeight: hovered ? '40px' : '0px',
-        opacity: hovered ? 1 : 0, transition: 'max-height 0.35s ease, opacity 0.3s ease',
+        overflow: 'hidden',
+        maxHeight: hovered ? '40px' : '0px',
+        opacity: hovered ? 1 : 0,
+        transition: 'max-height 0.35s ease, opacity 0.3s ease',
         position: 'relative', zIndex: 1,
       }}>
-        <a href={p.github} target="_blank" rel="noopener noreferrer"
-          style={styles.cardLink} onClick={(e) => e.stopPropagation()}>
+        <a
+          href={p.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ fontSize: '12px', color: p.color, textDecoration: 'none', letterSpacing: '0.06em', marginTop: '4px', display: 'inline-block', opacity: 0.85 }}
+          onClick={(e) => e.stopPropagation()}
+        >
           View on GitHub →
         </a>
       </div>
+
+      {/* Bottom accent bar */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0,
+        height: '2px', borderRadius: '0 0 18px 18px',
+        background: p.color,
+        transformOrigin: 'left',
+        transform: hovered ? 'scaleX(1)' : 'scaleX(0)',
+        transition: 'transform 0.45s cubic-bezier(0.34,1.56,0.64,1)',
+        zIndex: 2,
+      }} />
     </div>
   );
 }
@@ -206,39 +276,63 @@ export default function HomePage() {
       />
 
       {/* About */}
-      <section id="about" style={styles.aboutSection}>
-        <div style={styles.container}>
-          <div style={styles.aboutGrid}>
-            <div style={styles.aboutHeadingWrap}>
-              <p style={styles.sectionTag}>About</p>
-              <h2 style={styles.aboutHeading}>
-                Building at the<br />
-                <span style={styles.orange}>frontier of AI</span>
-              </h2>
+      <section id="about" style={styles.section}>
+        <div style={styles.aboutContainer}>
+
+          {/* Top: full-width heading */}
+          <div style={styles.aboutTopRow}>
+            <p style={styles.sectionTag}>About</p>
+            <h2 style={styles.aboutHeadingLarge}>
+              Building at the{' '}
+              <span style={styles.orange}>frontier of AI</span>
+            </h2>
+          </div>
+
+          {/* Bottom: 3-column info grid */}
+          <div style={styles.aboutInfoGrid}>
+            <div style={styles.aboutInfoCard}>
+              <div style={styles.aboutInfoIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+                </svg>
+              </div>
+              <p style={styles.aboutInfoLabel}>Background</p>
+              <p style={styles.aboutInfoText}>
+                Third-year CS undergraduate at GBPIET, graduating 2027. Deep focus on
+                machine learning, NLP, and generative AI systems — building things at
+                the intersection of research and real-world engineering.
+              </p>
             </div>
 
-            <div style={styles.aboutCopy}>
-              <p style={styles.aboutPara}>
-                I&apos;m Devansh Durgapal, a third-year Computer Science undergraduate
-                at GBPIET (graduating 2027), with a deep focus on machine learning,
-                NLP, and generative AI systems. I build things that sit at the
-                intersection of research and real-world engineering.
+            <div style={styles.aboutInfoCard}>
+              <div style={styles.aboutInfoIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                </svg>
+              </div>
+              <p style={styles.aboutInfoLabel}>What I Build</p>
+              <p style={styles.aboutInfoText}>
+                Neural networks on clinical and vision data, LLM pipelines with LangChain,
+                and cinematic frontend experiences with Next.js and Three.js. Competed in
+                NASA Space Apps Challenge and Smart India Hackathon.
               </p>
-              <p style={styles.aboutPara}>
-                My work spans training neural networks on clinical and vision data,
-                architecting LLM pipelines with LangChain, and crafting cinematic
-                frontend experiences with Next.js and Three.js. I&apos;ve competed in the
-                NASA International Space Apps Challenge and Smart India Hackathon,
-                and I&apos;m actively seeking ML internships where I can push these
-                systems further.
-              </p>
-              <p style={styles.aboutPara}>
-                When I&apos;m not training models or debugging embeddings, you&apos;ll find me
-                exploring Vedic astrology or obsessing over the aesthetics of a
-                well-designed interface.
+            </div>
+
+            <div style={styles.aboutInfoCard}>
+              <div style={styles.aboutInfoIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </div>
+              <p style={styles.aboutInfoLabel}>Beyond Code</p>
+              <p style={styles.aboutInfoText}>
+                Actively seeking ML internships on site and remote. When not training
+                models or debugging embeddings, you'll find me out on a run, in the gym,
+                or deep in a chess match.
               </p>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -252,7 +346,6 @@ export default function HomePage() {
       {/* Projects */}
       <section id="projects" style={styles.section}>
         <div style={styles.projectsContainer}>
-          {/* <p style={styles.sectionTag}>Projects</p> */}
           <h2 style={{ ...styles.aboutHeading, marginBottom: '0.6rem' }}>
             Things I&apos;ve <span style={styles.orange}>built</span>
           </h2>
@@ -293,71 +386,57 @@ export default function HomePage() {
 
 const styles = {
   main: { background: '#080402' },
-  section: {
-    minHeight: '100vh',
-    padding: 'clamp(72px, 10vh, 120px) 0',
-    background: '#080402',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  aboutSection: {
-    minHeight: '100vh',
-    padding: 'clamp(72px, 10vh, 120px) 0',
-    background: '#080402',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  container: {
-    width: '100%',
-    maxWidth: '1280px',
-    margin: '0 auto',
-    padding: '0 6vw',
-  },
+  section: { padding: '100px 0', background: '#080402' },
+  container: { maxWidth: '1100px', margin: '0 auto', padding: '0 6vw' },
   projectsContainer: { width: '100%', padding: '0 4vw' },
+
+  // About — full width
+  aboutContainer: { width: '100%', padding: '0 4vw' },
+  aboutTopRow: { marginBottom: '4rem' },
+  aboutHeadingLarge: {
+    fontSize: 'clamp(42px, 7vw, 96px)', fontWeight: 700, letterSpacing: '-0.04em',
+    lineHeight: 1.0, color: '#fff', fontFamily: 'SF Pro Display, -apple-system, sans-serif',
+    margin: 0,
+  },
+  aboutInfoGrid: {
+    display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '16px',
+  },
+  aboutInfoCard: {
+    background: 'rgba(255,255,255,0.025)',
+    border: '1px solid rgba(255,255,255,0.07)',
+    borderRadius: '18px',
+    padding: '28px 26px 26px',
+    display: 'flex', flexDirection: 'column', gap: '10px',
+    fontFamily: 'SF Pro Display, -apple-system, sans-serif',
+  },
+  aboutInfoIcon: {
+    color: 'rgba(255,168,55,0.7)',
+    width: 20, height: 20,
+    marginBottom: '4px',
+  },
+  aboutInfoLabel: {
+    fontSize: '11px', letterSpacing: '0.22em', textTransform: 'uppercase',
+    color: 'rgba(255,168,55,0.65)', margin: 0,
+  },
+  aboutInfoText: {
+    fontSize: '14.5px', lineHeight: 1.82, color: 'rgba(255,255,255,0.44)',
+    margin: 0, fontWeight: 300,
+  },
+
   sectionTag: {
     fontSize: '11px', letterSpacing: '0.32em', textTransform: 'uppercase',
-    color: 'rgba(255,168,55,0.7)', marginBottom: '1.8rem',
+    color: 'rgba(255,168,55,0.7)', marginBottom: '1.4rem',
     fontFamily: 'SF Pro Display, -apple-system, sans-serif',
-  },
-  aboutGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'minmax(280px, 0.95fr) minmax(0, 1.05fr)',
-    gap: 'clamp(2rem, 5vw, 5rem)',
-    alignItems: 'center',
-    width: '100%',
-  },
-  aboutHeadingWrap: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
   },
   aboutHeading: {
-    fontSize: 'clamp(36px, 5vw, 62px)',
-    fontWeight: 700,
-    letterSpacing: '-0.04em',
-    lineHeight: 1.05,
-    color: '#fff',
-    fontFamily: 'SF Pro Display, -apple-system, sans-serif',
-    margin: 0,
-    maxWidth: '8ch',
+    fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 700, letterSpacing: '-0.03em',
+    lineHeight: 1.1, color: '#fff', fontFamily: 'SF Pro Display, -apple-system, sans-serif', margin: 0,
   },
   orange: { color: 'rgba(255,168,55,0.92)' },
-  aboutCopy: {
-    marginTop: 0,
-    display: 'grid',
-    gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-    gap: '0.25rem',
-    justifyItems: 'start',
-  },
   aboutPara: {
-    fontSize: '15px',
-    lineHeight: 1.9,
-    color: 'rgba(255,255,255,0.45)',
-    maxWidth: '72ch',
-    marginBottom: '0.65rem',
-    fontFamily: 'SF Pro Display, -apple-system, sans-serif',
-    fontWeight: 300,
-    textAlign: 'left',
+    fontSize: '15px', lineHeight: 1.85, color: 'rgba(255,255,255,0.45)',
+    marginBottom: '1.2rem', fontFamily: 'SF Pro Display, -apple-system, sans-serif', fontWeight: 300,
   },
   divider: {
     height: '1px',
@@ -365,21 +444,6 @@ const styles = {
     margin: '0 6vw',
   },
   projectGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' },
-  card: {
-    borderRadius: '16px', padding: '24px 24px 22px',
-    display: 'flex', flexDirection: 'column', gap: '10px',
-    fontFamily: 'SF Pro Display, -apple-system, sans-serif',
-  },
-  cardHighlight: {},
-  cardTag: { fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,168,55,0.6)', margin: 0 },
-  cardTitle: { fontSize: '17px', fontWeight: 600, letterSpacing: '-0.01em', margin: 0 },
-  cardDesc: { fontSize: '13px', lineHeight: 1.75, color: 'rgba(255,255,255,0.42)', margin: '4px 0 0', fontWeight: 300 },
-  stackRow: { display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '2px' },
-  stackPill: {
-    padding: '3px 10px', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.08)',
-    fontSize: '10px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.06em',
-  },
-  cardLink: { fontSize: '12px', color: 'rgba(255,168,55,0.7)', textDecoration: 'none', letterSpacing: '0.06em', marginTop: '4px', display: 'inline-block' },
   footer: { padding: '48px 6vw', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' },
   footerText: { fontSize: '13px', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.08em', fontFamily: 'SF Pro Display, -apple-system, sans-serif' },
   footerLink: { color: 'rgba(255,168,55,0.5)', textDecoration: 'none' },
