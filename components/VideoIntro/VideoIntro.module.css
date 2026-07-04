@@ -1,0 +1,326 @@
+/* ── Base ───────────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #080402;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+/* ── Video layers ───────────────────────────────────────────────────────────── */
+.videoBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(42px) brightness(0.38) saturate(1.5);
+  transform: scale(1.12);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.videoMain {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 94%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  z-index: 3;
+  filter: brightness(1.06) contrast(1.04);
+}
+
+/* ── Gradient overlays ──────────────────────────────────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.overlayTop {
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 4, 2, 0.72) 0%,
+    transparent 38%
+  );
+}
+
+.overlayBottom {
+  background: linear-gradient(
+    to top,
+    rgba(8, 4, 2, 0.98) 0%,
+    rgba(8, 4, 2, 0.55) 28%,
+    transparent 58%
+  );
+}
+
+.overlaySides {
+  background: linear-gradient(
+    to right,
+    rgba(8, 4, 2, 0.82) 0%,
+    transparent 26%,
+    transparent 74%,
+    rgba(8, 4, 2, 0.82) 100%
+  );
+}
+
+/* ── Monitor-glow glare ─────────────────────────────────────────────────────── */
+.glare {
+  position: absolute;
+  top: 0;
+  right: 12%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(70, 130, 255, 0.05) 25%,
+    rgba(70, 130, 255, 0.11) 50%,
+    rgba(70, 130, 255, 0.05) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── Sound hint badge ───────────────────────────────────────────────────────── */
+.soundHint {
+  position: absolute;
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  transition: opacity 1.2s ease;
+  white-space: nowrap;
+}
+
+.soundDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 165, 55, 0.85);
+  animation: pulseDot 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.25; transform: scale(0.55); }
+}
+
+/* ── Portfolio copy ─────────────────────────────────────────────────────────── */
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 6vw 7vh;
+  pointer-events: none;
+}
+
+.tagline {
+  font-size: clamp(9px, 0.85vw, 12px);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 175, 75, 0.72);
+  font-weight: 400;
+  margin-bottom: 1.4rem;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.nameBlock {
+  line-height: 0.87;
+  margin-bottom: 1.7rem;
+}
+
+.nameFirst,
+.nameLast {
+  display: block;
+  font-size: clamp(52px, 8.5vw, 116px);
+  font-weight: 700;
+  letter-spacing: -0.034em;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.nameFirst {
+  color: #ffffff;
+}
+
+.nameLast {
+  color: rgba(255, 168, 55, 0.92);
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: clamp(13px, 1.4vw, 18px);
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  letter-spacing: 0.055em;
+  line-height: 1.7;
+  max-width: 500px;
+  border-left: 2px solid rgba(255, 155, 45, 0.38);
+  padding-left: 1.25rem;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.roleDetail {
+  font-size: 0.85em;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.04em;
+}
+
+/* ── Glassmorphism controls ─────────────────────────────────────────────────── */
+.controls {
+  position: absolute;
+  bottom: 7vh;
+  right: 6vw;
+  z-index: 7;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.ctrlBtn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s, transform 0.25s;
+  color: #fff;
+  outline: none;
+}
+
+.ctrlBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 195, 90, 0.52);
+  transform: scale(1.09);
+}
+
+.ctrlBtn:focus-visible {
+  outline: 2px solid rgba(255, 165, 55, 0.7);
+  outline-offset: 3px;
+}
+
+.ctrlBtn:active {
+  transform: scale(0.96);
+}
+
+/* ── Scroll indicator ───────────────────────────────────────────────────────── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 3.8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: opacity 0.3s;
+}
+
+.scrollIndicator:hover {
+  opacity: 0.7;
+}
+
+.scrollLabel {
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.14);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollPulse {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  width: 1px;
+  height: 22px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 165, 55, 0.85),
+    transparent
+  );
+  animation: scrollFall 1.9s ease-in-out infinite;
+}
+
+@keyframes scrollFall {
+  0%   { top: -22px; opacity: 0; }
+  15%  { opacity: 1; }
+  100% { top: 56px;  opacity: 0; }
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .content {
+    padding: 0 5vw 10vh;
+  }
+
+  .videoMain {
+    height: 85%;
+  }
+
+  .controls {
+    bottom: 10vh;
+    right: 5vw;
+  }
+
+  .nameLast,
+  .nameFirst {
+    font-size: clamp(42px, 12vw, 72px);
+  }
+
+  .tagline {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soundDot,
+  .scrollPulse {
+    animation: none;
+  }
+}

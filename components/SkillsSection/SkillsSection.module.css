@@ -1,0 +1,147 @@
+.section {
+  padding: 100px 0;
+  background: #080402;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  padding: 0 4vw;
+}
+
+.sectionTag {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 168, 55, 0.7);
+  margin-bottom: 1.4rem;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  padding-left: 0.5vw;
+}
+
+.heading {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  margin: 0 0 3rem;
+  padding-left: 0.5vw;
+}
+
+.accent {
+  color: rgba(255, 168, 55, 0.92);
+}
+
+/* Strict 4-column grid, fills full width */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  border-radius: 20px;
+  padding: 32px 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  cursor: default;
+  overflow: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    background 0.3s ease;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  min-height: 180px;
+}
+
+/* 9th card (Sklearn) spans to center if in last row */
+.card:last-child:nth-child(4n + 1) {
+  grid-column: 2 / 4;
+}
+
+/* Spotlight glow blob */
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  border-radius: 20px;
+}
+
+/* Icon container */
+.iconWrap {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  transition:
+    color 0.35s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.35s ease;
+}
+
+/* Skill name */
+.name {
+  position: relative;
+  z-index: 1;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* Description reveal */
+.descWrap {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.35s ease;
+}
+
+.desc {
+  font-size: 12.5px;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Bottom accent bar */
+.bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 0 0 20px 20px;
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card:last-child:nth-child(4n + 1) {
+    grid-column: auto;
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .container {
+    padding: 0 5vw;
+  }
+}
