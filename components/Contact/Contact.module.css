@@ -1,0 +1,239 @@
+.section {
+  padding: 100px 0 80px;
+  background: #080402;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  padding: 0 4vw;
+}
+
+.sectionTag {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 168, 55, 0.7);
+  margin-bottom: 1.4rem;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+}
+
+/* Header row */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.headerLeft {
+  flex: 1;
+  min-width: 260px;
+}
+
+.heading {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #fff;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  margin: 0 0 1.2rem;
+}
+
+.accent {
+  color: rgba(255, 168, 55, 0.92);
+}
+
+.subtext {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.42);
+  font-weight: 300;
+  max-width: 460px;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+}
+
+/* CTA area */
+.ctaWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  padding-top: 6px;
+}
+
+.ctaBtn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 168, 55, 0.35);
+  background: rgba(255, 168, 55, 0.08);
+  color: rgba(255, 168, 55, 0.9);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s ease;
+}
+
+.ctaBtn:hover {
+  background: rgba(255, 168, 55, 0.15);
+  border-color: rgba(255, 168, 55, 0.6);
+  transform: translateY(-2px);
+}
+
+.ctaBtn:active {
+  transform: translateY(0);
+}
+
+.ctaHint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.05em;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+}
+
+/* Cards grid — 3 columns */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  border-radius: 18px;
+  padding: 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    background 0.3s ease;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+}
+
+/* Glow blob */
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  border-radius: 18px;
+}
+
+/* Icon */
+.iconWrap {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  transition:
+    color 0.35s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.35s ease;
+}
+
+/* Text content */
+.cardContent {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.cardLabel {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0 0 5px;
+  transition: color 0.3s ease;
+}
+
+.cardValue {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+  word-break: break-all;
+}
+
+/* Arrow */
+.arrow {
+  position: absolute;
+  top: 22px;
+  right: 20px;
+  font-size: 18px;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Bottom bar */
+.bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 0 0 18px 18px;
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+/* Availability badge */
+.availability {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 3rem;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.04em;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34A853;
+  box-shadow: 0 0 8px #34A85388;
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px #34A85388; }
+  50% { opacity: 0.6; box-shadow: 0 0 16px #34A853cc; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .headerRow {
+    flex-direction: column;
+  }
+  .ctaWrap {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
